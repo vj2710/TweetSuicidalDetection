@@ -4,7 +4,7 @@ In CART Gini index is used to measure the impurity and evaluate the spilts over 
 Below Equation were used -
 
 Gini index : 
-gini=1-P^2(Target=-1)—P^2(Target=1)
+gini=1-P^2(Target=-1)â€”P^2(Target=1)
 Target = -1 indicates suicidal
 Target = 1  indicated non-suicidal
 P - Probability of the class
@@ -15,12 +15,11 @@ Two branches were build after a split on a  node - left and right ->
 p = (number_of_rows(left) / (number_of_rows(left) + number_of_rows(right)))
 information gain = (gini(dataset_in_current_node) - p * gini(left) - (1 - p) * gini(right))
  
-The information gain is computed using uncertainty of the node, minus the weighted impurity (p) of two child nodes.
+The information gain is computed using uncertainty of the node, minus the weighted impurity (p) of two child nodei.e left and right branch.
 
 Build the classifer model :
 ---------------------------------------
 Input :  Feature Set ( TF-IDF;Frequency Matrix)
-
 Output : Decision Tree
 
 Algorithm :
