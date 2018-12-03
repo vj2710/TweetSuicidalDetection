@@ -1,0 +1,24 @@
+We implemented Linear SVM, for which learning of hyperplane is done by transforming our problem using linear algebra. 
+This is where kernel comes into the picture. We used two types of kernels: 
+Kernel function is given by,
+  	      K(x,z)=φ(x),φ(z)
+Where x, z are points taken from the training data.
+For linear kernel, φ(x)=(x_i.x_j) 
+and for polynomial kernel: φ(x)=〖(x_i.x_j)〗^d
+Where d = degree of polynomial (in our case d = 2), C= constant. x_i is the input vector and x_j represents the support vector. 
+
+The goal of the classifier is to first find the decision boundary between the two classes, 
+y = (-1,1) (indicating a binary response) that is maximally far from any point in the training data
+(considering some points to be outliers or noise). Then Using aforementioned kernel methods, SVM classifier
+finds two hyperplanes that separates the two classes and distance between them is set as large as possible 
+so as to find a maximum margin hyperplane(that lies midway between them). The distance is computed by using 
+'distance from point to plane' equation and to prevent the points from falling inside the margin we added 
+the condition that for all 1 ≤ i ≤ n,  y_i (w^t x_i+b) ≥ 1 so that all points lie on the correct side of the margin.
+
+For optimization, we used Stochastic sub-gradient descent given by, 
+J^t (w)=1/2 w^t w+C max(0,1-y_i (w^t x_i ))
+Where J^t (w) is a gradient function of w ⃗, for defined number of steps per epoch(i.e., 1000),
+the training data is shuffled randomly at start of each epoch and for each training example 
+gradient function is computed. A step is taken in the direction of the vector selected from 
+the gradient function if  y_i (w^t x_i )≥1 else direction is changed when condition is not 
+satisfied and J^t (w)  is equal to w-Cy_i x_i.
