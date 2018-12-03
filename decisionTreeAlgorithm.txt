@@ -1,0 +1,56 @@
+Goal : Build a classifier model based using CART algorithm. 
+In CART Gini index is used to measure the impurity and evaluate the spilts over the dataset.
+
+Below Equation were used -
+
+Gini index : 
+gini=1-P^2(Target=-1)—P^2(Target=1)
+Target = -1 indicates suicidal
+Target = 1  indicated non-suicidal
+P - Probability of the class
+
+Information Gain:
+Two branches were build after a split on a  node - left and right ->
+
+p = (number_of_rows(left) / (number_of_rows(left) + number_of_rows(right)))
+information gain = (gini(dataset_in_current_node) - p * gini(left) - (1 - p) * gini(right))
+ 
+The information gain is computed using uncertainty of the node, minus the weighted impurity (p) of two child nodes.
+
+Build the classifer model :
+---------------------------------------
+Input :  Feature Set ( TF-IDF;Frequency Matrix)
+
+Output : Decision Tree
+
+Algorithm :
+1. The root node of the Tree was provided with the entire dataset.
+2. We then computed the gini index of the dataset.
+3. Then we performed below task for all the feature/attribute's unique values :
+	2.1 Partitioned the dataset into two branches -
+	    [ criteria used - for a column and a given value in consideration, are the values in that particular column less than the value in question? ]
+	2.2 Then we compute the information gain on each split and find the maximum information gain spilt value for a particular column
+	ensuring we have the atleast one row in both the branch. 
+	
+ This step gives the best split value for every feature in the dataset.
+ 3. Then we find the feature with the bestsplit and use it to split the dataset at the tree node
+
+4. Steps 2 and 3 were repeated until the stopping criterias were met :
+   4.1 For a give node the information_gain > 0 and number of rows in that node should be a minimum of 20.
+   4.2 For a node if the number of rows in either of the two branch is less than 10.
+
+Predicting the class of test dataset :
+-------------------------------------
+
+Input: Root of the Decision Tree and a row of the test dataset
+Output : Predicted Class of the test row.
+
+Algorithm:
+
+1. Traversed over the decision Tree using Pre-order tree traversal- 
+   we compared the best split criteria value at each node with the corresponding feature's value of the test_row 
+   and if the test_row value was found to be less then we moved onto to left branch otherwise we traversed the right branch of that 
+   respective node.
+
+2. Step1 was followed till we reached a leaf node and then we computed the frequency table of classes at that leaf node and returned the class with the maximium 
+   result as predicted class. 
