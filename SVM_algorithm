@@ -1,3 +1,8 @@
+A Support Vector Machine is a discriminative classifier formally defined by a separating hyperplane.
+In other words, given labeled training data (supervised learning), the algorithm outputs an optimal 
+hyperplane which categorizes new examples. In two dimentional space this hyperplane is a line dividing a
+plane in two parts where in each class lay in either side.[reference-https://medium.com/machine-learning-101/chapter-2-svm-support-vector-machine-theory-f0812effc72]
+
 We implemented Linear SVM, for which learning of hyperplane is done by transforming our problem using linear algebra. 
 This is where kernel comes into the picture. We used two types of kernels: 
 Kernel function is given by,
