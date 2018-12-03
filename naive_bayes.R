@@ -23,7 +23,8 @@ My_NaiveBayes<- function (dataset){
       }
   
       tab_col_sum = tab_col_sum/sum(tab_col_sum)
-     
+      length(tab_col_sum) <- max(length(tab_col_sum), ncol(cond_prob))
+      tab_col_sum[length(tab_col_sum)] <- -2
       cond_prob_final = rbind(tab_col_sum,cond_prob)
       
       return (cond_prob_final)
