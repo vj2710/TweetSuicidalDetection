@@ -1,0 +1,51 @@
+Goal : Build a classifier model based on Naive Bayes [which is formulated on the Bayes Theorm]. 
+In this algorithm we calculate : 
+- Likelihood of each feature v/s class attribute
+- Class Probability 
+These components are used to compute Maximumn posterior probability of all the target classes given the test feature vector and we select the max posterior probability 
+to predict the classes of the test dataset.
+
+
+Building the classifer model :
+-----------------------------
+Input :  Feature Set ( TF-IDF/Frequency Matrix)
+Output :  Feature's likelihood and class probabilities Matrix i,e Classifier
+
+Algorithm:
+1. We Construct the frequency table for every attribute against the class attributes.
+2. We compute the column wise sum of this frequency table, which gives the total count of each class.
+3. We transform this frequency table to likelihood table ie. we divide the frequencies (obtained in step 1) by the column wise sum (Step2) 
+ and bind the likelihood table with their respective column index.
+
+Step 1 to Step 3 were performed for all the attributes of the dataset and the result of each attribute is bound together to form a matrix of likelihood.
+
+4. Then we compute the class probabilties and update the length of the datastructure holding these class probabilities to match the length of the
+datastructure of the likelihood table by  adding -2 as last column value of class probabilities and bind the likelihood matrix and class probability together.
+
+The resultant matrix is used to predict the class of the test dataset.
+
+
+Predict the class of test dataset :
+---------------------------------
+Input: A row of test dataset and Classifier (Feature's likelihood and class probabilities Matrix)
+Output : Predicted Class of the test row.
+
+Algorithm : 
+1. We convert any non-integer value in the index column of the Classifer to integer value.
+2. Initialized the predicted class as the Maximum of the prior class probabilities , so that if a test row with features that the classifier 
+has no knowledge about can be precited as the maximum of the prior probabilities.
+3. We then iterate over the test_row to check if any feature value of the test row is missing from learned classifier - 
+   if any feature is found to be missing, that feature column is removed from the test row.
+4. Then we fetch all the rows from classifier that have same value under the column : Rownames  as that of the feature vector of the test row.
+5. After this , we selected the likelihood probabilities for a specific value under a particular column by matching the column index and 
+column value with the test row's feature value and feature's(column) index.
+This provided us with all the likelihood of the test row's feature vector against all the unique classes of the dataset.
+
+To this result we bind the class probabilities ensuring we dont have 0 probability for any of classes by updating that value with 0.0001.
+6. Then we performed a columwise multiplication to compute the posterior probabilities for all the classes of dataset and test row relevant features.
+i.e [BAYES THEORM.]
+7. Then we find the maximum of these posterior probability of all the classes and set the name of that class as the predicted class.
+
+
+ 
+
